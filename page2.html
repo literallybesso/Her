@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>For Malak - My Reasons & Final Act of Love</title>
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+  <!-- AOS Animation CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <!-- Animated Hearts Background Container -->
+  <div class="heart-container"></div>
+
+  <!-- Header with Navigation -->
+  <header>
+    <h1>&hearts; Malak &hearts;</h1>
+    <nav>
+      <ul>
+        <li><a href="index.html">Main Page</a></li>
+        <li><a href="#reasons">My Reasons</a></li>
+        <li><a href="#final-act">My Final Act of Love</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Buttons to Reveal Sections -->
+  <!-- (Kept data-aos="fade-up" for the buttons container, as you haven't asked to remove it) -->
+  <div class="reveal-btn-container" data-aos="fade-up">
+    <button id="reasonsBtn" class="reveal-btn button-animation">Reveal My Reasons</button>
+    <button id="finalActBtn" class="reveal-btn button-animation">Reveal My Final Act</button>
+  </div>
+
+  <!-- My Reasons Section (Removed data-aos to prevent flicker on content) -->
+  <section id="reasons">
+    <!-- Hidden by default via CSS (.hidden-content { display: none; }) -->
+    <div class="story-container hidden-content">
+      <h2>My Reasons</h2>
+      <p>
+        I don't know how long we have stopped talking now, I have lost count a long time ago, but I cannot deny that no day passed without me seeing your face as a silhouette wherever I looked. The way I left you was harsh, and I deserve the worst for it because looking back now I never gave you a thorough explanation of why I even decided to leave you in the first place knowing that you could not be replaced at all.
+      </p>
+      <p>
+        I did all that not because I could not stop loving you, no I still love you till this day and rejected a few because my heart is still attached to someone else and that would not be fair to anyone. I had fear that I could never provide you with everything you loved when the time needed it and I would just be a drag even if you loved me so much but for someone passionate as you and breathtaking I could not bare thinking one day I would be able to tell you "I can't".
+      </p>
+      <p>
+        Looking back now it seems like I chose fear over you and I fucking hope earth swallows me for doing such bullshit you were always patient with me, loved me so much and was way better than me and I felt like I just could not stand to be the one you deserve. Especially that I had you go through all that during your hardest times and when finals were approaching which I deserve to be killed for I won't deny it.
+      </p>
+      <p>
+        But what did I do during all this time where we stopped talking? Our months apart granted me an opportunity to deeply learn about love along with its meaning to give it and nurture it while showing up with caring affection instead of fear. The evolution of my understanding showed me that real love consists of being emotionally available along with consistency and presence.
+      </p>
+      <p>
+        The person who abandoned his lover has fundamentally transformed. I have gained the ability to provide love completely while being devoted with kindness and showing genuine affection. This may be useless and literally change nothing, but I have been wanting to do it for a long time, and I just got the urge to do it now, so I am doing it.
+      </p>
+      <p>
+        I used to say, "I can't." I can't give you the life you deserve. I can't face the weight of other people's opinions. I can't be what you need. But looking back, I see that it wasn't that I couldn't, it's that I was scared. Scared of not being enough, scared of being rejected, scared of how deeply I loved you and what that meant. I let fear speak for me instead of love.
+      </p>
+      <p>
+        But now, after time, growth, and a lot of honest reflection, I see things differently. I can love you fully, freely, and without hesitation. I can stand by you, not just when things are easy, but especially when they're not. I can be present, intentional, and vulnerable in the way real love requires. I've grown into someone who doesn't run from love but reaches for it and if there's ever a second chance, I want to show you just how much I mean that. Well, that's all I wanted to say and hope you guys be happy and wish you the best with your final semester finals and his as well, be proud you are great.
+      </p>
+    </div>
+  </section>
+  
+  <!-- My Final Act of Love Section (Removed data-aos to prevent flicker on content) -->
+  <section id="final-act">
+    <!-- Hidden by default via CSS (.hidden-content { display: none; }) -->
+    <div class="apology-container hidden-content">
+      <h2>My Final Act of Love</h2>
+      <p>
+        I wrote this and it will be the last thing I do before completely disappearing from your life. It was such an amazing time we had together, and I would go through anything to have it, because you are unreplaceable. Show this to anyone, laugh at it, don't look at it — the outcome would still be me wishing you the best, because you were indeed and always <span style="color: red;">Different</span>. Just know I will always be here if you want someone to talk to.
+      </p>
+    </div>
+  </section>
+
+  <!-- Footer (No animation on footer) -->
+  <footer>
+    <p>&copy; 2025 A Message of Love for Malak - Second Page</p>
+  </footer>
+
+  <!-- AOS Animation JS -->
+  <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+  <script>
+    AOS.init({ duration: 500, easing: 'ease-out', once: true });
+  </script>
+  <!-- Import our module script (unchanged) -->
+  <script type="module" src="script.js"></script>
+  <!-- Additional script for revealing content and hover effect -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const reasonsBtn = document.getElementById('reasonsBtn');
+      const finalActBtn = document.getElementById('finalActBtn');
+      const reasonsContent = document.querySelector('#reasons .story-container');
+      const finalActContent = document.querySelector('#final-act .apology-container');
+      
+      reasonsBtn.addEventListener('click', function() {
+        reasonsContent.classList.add('show');
+        this.classList.remove('button-animation');
+        
+        // Smooth scroll to the section
+        setTimeout(() => {
+          document.querySelector('#reasons').scrollIntoView({
+            behavior: 'smooth'
+          });
+        }, 300);
+      });
+      
+      finalActBtn.addEventListener('click', function() {
+        finalActContent.classList.add('show');
+        this.classList.remove('button-animation');
+        
+        // Smooth scroll to the section
+        setTimeout(() => {
+          document.querySelector('#final-act').scrollIntoView({
+            behavior: 'smooth'
+          });
+        }, 300);
+      });
+      
+      // Wrap the entire content of each paragraph in .hover-text so the hover effect applies to all text
+      document.querySelectorAll('.story-container p, .apology-container p')
+        .forEach(paragraph => {
+          paragraph.innerHTML = `<span class="hover-text">${paragraph.innerHTML}</span>`;
+        });
+    });
+  </script>
+</body>
+</html>

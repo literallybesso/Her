@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Main Page - For Malak</title>
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+  <!-- AOS Animation CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <!-- Animated Hearts Background Container -->
+  <div class="heart-container"></div>
+
+  <!-- Header -->
+  <header>
+    <h1>&hearts; Malak &hearts;</h1>
+  </header>
+
+  <!-- Hero Section (Main Menu) -->
+  <section id="hero" data-aos="fade-up">
+    <div class="hero-content">
+      <h2>A Heartfelt Message of Reflection and Apology</h2>
+      <p>
+        I share my innermost thoughts and the reasons behind my actions, hoping for forgiveness and a chance to heal.
+      </p>
+      <!-- Magic Button triggers magic effect then navigates to page2.html -->
+      <button id="magicBtn">Click Me for a Surprise!</button>
+    </div>
+  </section>
+
+  <!-- Footer (No animation on footer) -->
+  <footer>
+    <p>&copy; 2025 A Message of Love for Malak - Main Page</p>
+  </footer>
+
+  <!-- AOS Animation JS -->
+  <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+  <script>
+    AOS.init({ duration: 500, easing: 'ease-out', once: true });
+  </script>
+  <!-- Import our module script -->
+  <script type="module" src="script.js"></script>
+</body>
+</html>
