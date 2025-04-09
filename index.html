@@ -9,6 +9,155 @@
   <!-- AOS Animation CSS -->
   <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
   <link rel="stylesheet" href="styles.css" />
+  <!-- Additional styling -->
+  <style>
+    /* Remove default body margin/padding and ensure no horizontal scrollbar */
+    html, body {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      height: 100%;
+      overflow-x: hidden;
+    }
+
+    /* Custom cursor: red 'M' inside a heart (placeholder image) */
+    body {
+      cursor: url('https://via.placeholder.com/32x32.png?text=M') 16 16, auto;
+    }
+
+    /* Announcement styling */
+    .announcement {
+      background: linear-gradient(90deg, #ff9a9e, #e63946);
+      color: #fff;
+      padding: 10px 15px;
+      border-radius: 8px;
+      margin-bottom: 10px;
+      text-align: center;
+      font-size: 1.1rem;
+      animation: slideInDown 1s ease-out;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    }
+    @keyframes slideInDown {
+      0% {
+        transform: translateY(-50%);
+        opacity: 0;
+      }
+      100% {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+    .announcement:hover {
+      transform: scale(1.02);
+      transition: transform 0.3s ease;
+    }
+
+    /* Live Counter styling */
+    .live-counter {
+      background: linear-gradient(90deg, #e63946, #ff9a9e);
+      color: #fff;
+      padding: 8px 12px;
+      border-radius: 8px;
+      text-align: center;
+      font-size: 1rem;
+      margin-bottom: 20px;
+      animation: fadeIn 1s ease-out;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    /* Sparkle styling – updated: fixed positioning so sparkles follow the cursor even when scrolling */
+    .sparkle {
+      position: fixed;
+      pointer-events: none;
+      color: #fff;
+      font-size: 16px;
+      animation: fadeOut 0.8s ease-out forwards;
+      transform: translate(-50%, -50%);
+    }
+    @keyframes fadeOut {
+      0% {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1);
+      }
+      100% {
+        opacity: 0;
+        transform: translate(-50%, -70%) scale(1.2);
+      }
+    }
+
+    /* Position & style for the 'Malak' popup on heart click */
+    .malak-popup {
+      position: absolute;
+      transform: translate(-50%, -50%) scale(0);
+      font-size: 1.5rem;
+      color: #e63946;
+      font-weight: bold;
+      animation: malakPop 0.8s forwards ease-out;
+      pointer-events: none;
+      z-index: 1000;
+    }
+    @keyframes malakPop {
+      0% {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(0.2);
+      }
+      50% {
+        opacity: 1;
+        transform: translate(-50%, -60%) scale(1.5);
+      }
+      100% {
+        opacity: 0;
+        transform: translate(-50%, -80%) scale(1);
+      }
+    }
+
+    /* Adjust hero content to fit nicely */
+    #hero {
+      padding: 40px 20px;
+      min-height: calc(100vh - 60px);
+    }
+    #hero .hero-content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+    #hero h2 {
+      margin-top: 10px;
+      font-size: 2rem;
+      text-align: center;
+    }
+    #hero p {
+      font-size: 1rem;
+      max-width: 600px;
+      text-align: center;
+    }
+    #magicBtn {
+      margin-top: 20px;
+    }
+
+    /* Ensure footer doesn't overlay content */
+    footer {
+      position: relative;
+      z-index: 999;
+    }
+
+    /* The heart-container is fixed, behind everything */
+    .heart-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: -1;
+      overflow: hidden;
+    }
+  </style>
 </head>
 <body>
   <!-- Animated Hearts Background Container -->
@@ -18,20 +167,27 @@
   <header>
     <h1>&hearts; Malak &hearts;</h1>
   </header>
-
-  <!-- Hero Section (Main Menu) -->
+  
+  <!-- Hero Section with Integrated Announcement and Live Counter -->
   <section id="hero" data-aos="fade-up">
     <div class="hero-content">
+      <!-- Announcement Banner -->
+      <div class="announcement">
+        Website is still in progress to become perfect like Her
+      </div>
+      <!-- Live Counter -->
+      <div id="liveCounter" class="live-counter" data-count="0">Moments of Love: 0</div>
+      <!-- Main Menu Content -->
       <h2>A Heartfelt Message of Reflection and Apology</h2>
       <p>
         I share my innermost thoughts and the reasons behind my actions, hoping for forgiveness and a chance to heal.
       </p>
-      <!-- Magic Button triggers magic effect then navigates to page2.html -->
+      <!-- Magic Button triggers magical effect then navigates to page2.html -->
       <button id="magicBtn">Click Me for a Surprise!</button>
     </div>
   </section>
 
-  <!-- Footer (No animation on footer) -->
+  <!-- Footer -->
   <footer>
     <p>&copy; 2025 A Message of Love for Malak - Main Page</p>
   </footer>
