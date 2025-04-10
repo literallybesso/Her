@@ -48,6 +48,13 @@ header {
     top: 50%;
     transform: translateY(-50%);
   }
+
+  .audio-btn {
+    position: absolute;
+    left: 230px;  /* Adjust for desired spacing from the left edge */
+    top: 25%;
+    transform: translateY(-50%);
+  }
   
 }
 
@@ -173,6 +180,7 @@ section {
   padding: 20px;
   width: 80%;
   max-width: 800px;
+  
 }
 
 .reveal-btn {
@@ -252,6 +260,30 @@ section {
   cursor: pointer;
   transition: transform 0.3s, background 0.3s;
 }
+/* Add after the other button styles */
+/* Audio Button Styling */
+.audio-btn {
+  padding: 12px 24px;
+  background-color: #e63946;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  margin: 20px auto;
+  display: block;
+  
+}
+
+.audio-btn:hover {
+
+  box-shadow: 0 6px 12px rgba(0,0,0,0.2);
+  background-color: #d32f2f;
+}
+
 
 #hero button:hover {
   background: #d32f2f;
@@ -471,3 +503,35 @@ html {
 *::after {
   cursor: url("assets/cursors/PompPomA/pompointercur.cur") 16 16, auto !important;
 }
+
+#intro-video-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 99999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  opacity: 1;
+  transition: opacity 1s ease;
+  pointer-events: none; /* So the user can’t accidentally click it */
+  background: transparent; /* ✅ Let that transparency shine */
+}
+
+#intro-video-overlay.fade-out {
+  opacity: 0;
+}
+
+#intro-video-overlay video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* ✅ fills the screen, keeps aspect */
+  pointer-events: none;
+}
+
+
+
+

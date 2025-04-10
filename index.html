@@ -20,6 +20,8 @@
       overflow-x: hidden;
     }
 
+    
+
     /* Custom cursor: red 'M' inside a heart (placeholder image) */
     body {
       cursor: url('https://via.placeholder.com/32x32.png?text=M') 16 16, auto;
@@ -137,8 +139,10 @@
       text-align: center;
     }
     #magicBtn {
-      margin-top: 20px;
+  display: block;
+  margin: 0 auto 10px auto; /* center it horizontally with a bottom margin */
     }
+
 
     /* Ensure footer doesn't overlay content */
     footer {
@@ -160,6 +164,7 @@
   </style>
 </head>
 <body>
+  
   <!-- Animated Hearts Background Container -->
   <div class="heart-container"></div>
 
@@ -184,6 +189,7 @@
       </p>
       <!-- Magic Button triggers magical effect then navigates to page2.html -->
       <button id="magicBtn">Click Me for a Surprise!</button>
+      <button id="switchAudioBtn" class="audio-btn">Switch Music</button>
     </div>
   </section>
 

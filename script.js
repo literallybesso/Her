@@ -1,6 +1,25 @@
 // Import the audio service module
 import audioService from './audio-service.js';
 
+// Add an audio tracks array and a function to switch between tracks
+const audioTracks = [
+  "Audio/DIFF.mp3",
+  "Audio/heartbeat.mp3",  // Replace with your actual second track path
+  // Add more tracks as needed
+];
+
+// Get current track index from sessionStorage or default to 0
+let currentTrackIndex = parseInt(sessionStorage.getItem('currentTrackIndex') || '0');
+
+function switchAudioTrack() {
+  // Move to next track (or loop back to the first one)
+  currentTrackIndex = (currentTrackIndex + 1) % audioTracks.length;
+  // Store new track index in sessionStorage
+  sessionStorage.setItem('currentTrackIndex', currentTrackIndex.toString());
+  // Play the new track
+  audioService.play(audioTracks[currentTrackIndex]);
+}
+
 // Custom cursor implementation
 function initCustomCursor() {
   // Check if we're on a Windows system (better support for .ani files)
@@ -37,7 +56,12 @@ document.addEventListener("DOMContentLoaded", () => {
   // Initialize custom cursor first
   initCustomCursor();
   
-  audioService.play("Audio/DIFF.mp3");
+  // Initialize audio (only start a new track if not already playing)
+  const audioState = JSON.parse(sessionStorage.getItem('audioState') || '{}');
+  if (!audioState.src) {
+    // No audio state found, start playing the current track
+    audioService.play(audioTracks[currentTrackIndex]);
+  }
   
   // Initialize reveal buttons functionality
   initRevealButtons();
@@ -50,6 +74,18 @@ document.addEventListener("DOMContentLoaded", () => {
   
   // Initialize sparkle effect on mouse move
   initSparkleEffect();
+  
+  // Add event listener to audio switch button if it exists
+  const switchAudioBtn = document.getElementById('switchAudioBtn');
+  if (switchAudioBtn) {
+    switchAudioBtn.addEventListener('click', function() {
+      this.classList.add('magical');
+      switchAudioTrack();
+      setTimeout(() => {
+        this.classList.remove('magical');
+      }, 1000);
+    });
+  }
 });
 
 // -- Reveal Buttons (For "My Reasons" / "My Final Act") --
@@ -136,12 +172,7 @@ function createMalakPopup(leftPos, fontSize) {
   popup.classList.add("malak-popup");
   popup.innerText = "Malak";
 
-  // Convert leftPos (e.g. "42.5%") to numeric for optional variation
   popup.style.left = leftPos;
-  // For vertical, just pick a random vertical offset (like 50% or so).
-  // But we want it near the same location the heart was. The hearts float from bottom to top,
-  // so we'll approximate it. We can just set top = 50% or so, or we can store the heart's top dynamically.
-  // For simplicity, let's put it around mid-screen:
   popup.style.top = "50%";
 
   document.querySelector(".heart-container").appendChild(popup);
@@ -157,8 +188,13 @@ const magicBtn = document.getElementById("magicBtn");
 if (magicBtn) {
   magicBtn.addEventListener("click", function () {
     this.classList.add("magical");
+    
+    // Ensure audio state is saved immediately before navigation
+    audioService.saveState();
+    
     setTimeout(() => {
       this.classList.remove("magical");
+      // Navigate to the next page
       window.location.href = "page2.html";
     }, 1000);
   });
@@ -197,17 +233,10 @@ document.addEventListener("visibilitychange", () => {
   if (document.hidden && liveCounterInterval) {
     clearInterval(liveCounterInterval);
   } else if (!liveCounterInterval) {
-    // Only reinitialize the counter if it isn’t already running
+    // Only reinitialize the counter if it isn't already running
     initLiveCounter();
   }
 });
-
-document.addEventListener("DOMContentLoaded", () => {
-  // Other initializations...
-  initLiveCounter();
-});
-
-
 
 // ---------- Sparkle Effect (Follows the Cursor) ----------
 function initSparkleEffect() {
@@ -234,3 +263,48 @@ window.addEventListener('load', function() {
     initCustomCursor(); // Re-apply custom cursor
   }, 100);
 });
+
+document.addEventListener("DOMContentLoaded", () => {
+  // Check if video already played (optional for one-time play logic)
+  // if (localStorage.getItem("introPlayed")) return;
+
+  // Create overlay
+  const overlay = document.createElement("div");
+  overlay.id = "intro-video-overlay";
+
+  const video = document.createElement("video");
+  video.id = "intro-video";
+  video.autoplay = true;
+  video.muted = true;
+  video.playsInline = true;
+
+  // fallback if autoplay fails
+  video.setAttribute("preload", "auto");
+
+  const source = document.createElement("source");
+  source.src = "webintro/joker.webm"; // ✅ Check this path
+  source.type = "video/webm";
+
+  video.appendChild(source);
+  overlay.appendChild(video);
+  document.body.appendChild(overlay);
+
+  // Video ends or fails = fade out
+  const removeOverlay = () => {
+    overlay.classList.add("fade-out");
+    setTimeout(() => {
+      overlay.remove();
+      // localStorage.setItem("introPlayed", true); // Optional: remember it's played
+    }, 1000);
+  };
+
+  video.addEventListener("ended", removeOverlay);
+  video.addEventListener("error", removeOverlay); // fallback if video fails
+
+  // Safety timeout in case video doesn't fire events
+  setTimeout(() => {
+    if (document.body.contains(overlay)) removeOverlay();
+  }, 15000); // 15 seconds safety net
+});
+
+
